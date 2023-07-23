@@ -33,7 +33,11 @@
     "sass": "^1.63.3"
   },
   "dependencies": {
+    "@types/regression": "^2.0.2",
+    "chart.js": "^4.3.0",
     "eslint-loader": "^4.0.2",
-    "inter-ui": "^3.19.3"
+    "inter-ui": "^3.19.3",
+    "regression": "^2.0.1",
+    "vue-chartjs": "^5.2.0"
   }
 }
