@@ -27,5 +27,8 @@ export default defineNuxtConfig({
   },
   gtag: {
     id: 'G-QNLZ5NY7HH'
+  },
+  build: {
+    transpile: ['vue-countup-v3']
   }
 })

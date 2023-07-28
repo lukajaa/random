@@ -82,7 +82,7 @@ const chartOptions = {
 const linearRegression = regression.linear(data)
 
 const linearRegressionDaysToCrossing = Math.ceil(
-  (1000000 - linearRegression.equation[1]) / linearRegression.equation[0]
+  (1000000 - linearRegression.equation[1]) / linearRegression.equation[0] - 1
 )
 
 const linearRegressionLineOfBestFit = Array.from({ length: linearRegressionDaysToCrossing + 1 }, (_, i) => ({
