@@ -14,6 +14,8 @@
       >
         Start
       </button>
+      <p class="mt-2 text-center">Number of Options</p>
+      <input v-model="numOptions" type="number" class="mx-auto mt-2 flex rounded-lg bg-gray-500 px-6 py-2 text-white" />
     </div>
     <div v-else>
       <div class="mx-auto mt-12 w-fit text-center">
@@ -44,10 +46,13 @@
       class="fixed left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-center text-3xl font-bold md:text-6xl"
       style="background-color: rgba(0, 0, 0, 0.5)"
     >
-      <p v-if="correct" class="flex text-green-500">Guessed Correctly in {{ seconds }} seconds</p>
+      <div v-if="correct" class="flex flex-col text-green-500">
+        <p class="drop-shadow-lg">Guessed Correctly in {{ seconds }} seconds</p>
+        <p class="drop-shadow-lg">The song was {{ name }}</p>
+      </div>
       <div v-else class="flex flex-col text-red-500">
-        <p>Guessed Incorrectly in {{ seconds }} seconds</p>
-        <p>The correct answer was {{ name }}</p>
+        <p class="drop-shadow-lg">Guessed Incorrectly in {{ seconds }} seconds</p>
+        <p class="drop-shadow-lg">The song was {{ name }}</p>
       </div>
     </div>
     <BackButton />
@@ -57,6 +62,7 @@
 <script setup lang="ts">
 import data from '~/assets/data/Spotify/data.json'
 
+const numOptions = ref(5)
 const started = ref(false)
 const questionDone = ref(false)
 const correct = ref(false)
@@ -91,7 +97,7 @@ function newSong() {
 // find four random songs and add the correct one to the options then shuffle the options
 function newOptions() {
   options.value = []
-  while (options.value.length < 15) {
+  while (options.value.length < numOptions.value) {
     const randomSong = data[Math.floor(Math.random() * data.length)]
     let display = randomSong['Track Name'] + ' - '
     for (const artist of randomSong['Artist Name(s)']) {
@@ -102,7 +108,7 @@ function newOptions() {
       optionsAlbumCovers.value[display] = randomSong['Album Image URL']
     }
   }
-  options.value[Math.floor(Math.random() * 15)] = name.value
+  options.value[Math.floor(Math.random() * numOptions.value)] = name.value
   optionsAlbumCovers.value[name.value] = albumCover.value
 }
 
@@ -116,6 +122,7 @@ function playForOneSecond() {
 }
 
 function choose(option: string) {
+  audioPlayer.value.play()
   questionDone.value = true
   if (option === name.value) {
     correct.value = true
@@ -125,6 +132,7 @@ function choose(option: string) {
     numIncorrect.value += 1
   }
   setTimeout(() => {
+    audioPlayer.value.pause()
     questionDone.value = false
     seconds.value = 0
     newSong()
