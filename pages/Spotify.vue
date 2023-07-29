@@ -113,7 +113,6 @@
 </template>
 
 <script setup lang="ts">
-import CountUp from 'vue-countup-v3'
 import data from '~/assets/data/Spotify/data.json'
 
 const artistFrequencies: Record<string, number> = {}

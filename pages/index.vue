@@ -26,6 +26,10 @@ const links = [
   {
     name: 'Spotify Playlist Analyzer',
     link: '/Spotify'
+  },
+  {
+    name: 'Guess the Song (ASIEL)',
+    link: '/SongGuess'
   }
 ]
 </script>
