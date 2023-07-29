@@ -105,7 +105,8 @@ const linearRegressionData = {
 }
 
 // Last View Increase Method
-const lastIncrease = data[data.length - 1][1] - data[data.length - 2][1]
+const lastIncrease =
+  (data[data.length - 1][1] - data[data.length - 2][1]) / (data[data.length - 1][0] - data[data.length - 2][0])
 
 const lastViewIncreaseDaysToCrossing =
   Math.ceil((1000000 - data[data.length - 1][1]) / lastIncrease) + data[data.length - 1][0] + 1
